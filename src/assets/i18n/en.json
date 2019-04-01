@@ -85,6 +85,13 @@
     "FILTER_BY_PLACE": "Filter by Place:",
     "SELECT_PLACE": "Select Place"
   },
+  "EVI": {
+    "TITLE": "Enhanced Vegetation Index (EVI)",
+    "STARTING_DATE": "Starting Date:",
+    "SCAN_RANGE": "Scan Range (in days):",
+    "FILTER_BY_PLACE": "Filter by Place:",
+    "SELECT_PLACE": "Select Place"
+  },
 
   "RAINFALL": {
     "TITLE": "Rainfall Map",

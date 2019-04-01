@@ -5,7 +5,7 @@
  * Licensed under MIT
  */
 
-import { Component, Inject, OnInit, OnDestroy, ViewChildren, QueryList } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ViewChildren, QueryList, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -21,6 +21,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/combineLatest';
 import map from 'lodash-es/map';
 import omit from 'lodash-es/omit';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+
 
 @Component({
   selector: 'app-suitability-maps',
@@ -48,6 +50,8 @@ export class SuitabilityMapsComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _title: Title,
     private _store: Store<any>,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef
   ) {
     const resolvedConfig = this._mapConfig.suitability_maps;
 
@@ -62,6 +66,13 @@ export class SuitabilityMapsComponent implements OnInit, OnDestroy {
 
     // make sure that the `this` value inside the onMapZoom is this component's instance.
     this._zoomEndListener = this.onMapZoom.bind(this);
+
+    this.toastr.setRootViewContainerRef(vcr);
+
+  }
+  showSuccess() {
+
+    this.toastr.success('Fetching map layer', 'Please Wait');
   }
 
   ngOnInit() {
@@ -125,6 +136,7 @@ export class SuitabilityMapsComponent implements OnInit, OnDestroy {
   }
 
   processLayers() {
+    this.showSuccess();
     const layerType = 'suitability-map-simplified';
     let zoomLevel = 6;
     let method = 'getSuitabilityMapCountryLevelLayers';

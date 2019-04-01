@@ -96,7 +96,6 @@ export class RainfallMapService {
         if (isEmpty === false) {
           return Observable.throw(new Error('Please click on a land surface.'));
         }
-
         // create a new observable out of the data
         return Observable.of(data);
       })

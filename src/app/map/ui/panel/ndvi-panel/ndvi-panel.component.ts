@@ -66,6 +66,12 @@ export class NdviPanelComponent extends BasePanelComponent implements OnInit {
     super.onHideButtonClick(evt);
   }
 
+
+  isMapActive(): boolean {
+    return this._router.isActive(`/ndvi`, false);
+  }
+
+
 }
 
 

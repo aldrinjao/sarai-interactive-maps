@@ -226,6 +226,21 @@ export class TileLayerService {
     });
   }
 
+
+  getSVTRLayers(crop: string, options: any = {}): Array<L.WMSOptions> {
+    const attribution = this.getCropProductionAreaMapAttribution();
+    const layers = [
+      `${this._mapConfig.svtr_maps.wms.workspace}:${crop}`
+    ];
+    return map(layers, (item) => {
+      return assign({}, this.getDefaultOptions(), this.getDefaultWMSOptions(), {
+        layers: item,
+        minZoom: 5,
+        attribution,
+      }, options);
+    });
+  }
+
   getNdviLayerData(startDate: string, endDate: string, place?: string): Promise<any> {
     // throw error if endpoint does not exist
     if (typeof this._mapConfig.ndvi_maps.eeApiEndpoint === 'undefined' || this._mapConfig.ndvi_maps.eeApiEndpoint === '') {
@@ -266,6 +281,52 @@ export class TileLayerService {
       .toPromise()
       ;
   }
+
+
+  getEviLayerData(startDate: string, endDate: string, place?: string): Promise<any> {
+
+    // throw error if endpoint does not exist
+    if (typeof this._mapConfig.evi_maps.eeApiEndpoint === 'undefined' || this._mapConfig.evi_maps.eeApiEndpoint === '') {
+      return Promise.reject(new Error('API Endpoint for EVI Layers not specified'));
+    }
+
+    const method = this._mapConfig.evi_maps.eeApiEndpointMethod.toLowerCase();
+    let endpoint = this._mapConfig.evi_maps.eeApiEndpoint;
+
+    let args = [endpoint, {
+      startDate,
+      endDate
+    }];
+
+    if (method === 'get') {
+      endpoint += `/${startDate}/${endDate}`;
+
+      // add a query string to the endpoint
+      if (typeof place !== 'undefined') {
+        endpoint += `?place=${place}`;
+      }
+
+      args = [endpoint];
+    }
+
+    return this._http[method]
+      .apply(this._http, args)
+      .map((res: Response) => {
+        const jsonResult = res.json();
+        
+
+        // throw error here so that we can handle it properly later
+        if (jsonResult.success === false) {
+          throw new Error('Map sssData not found.');
+        }
+
+        return jsonResult;
+      })
+      .toPromise()
+      ;
+  }
+
+
 
   getRainfallMapLayerData(startDate: string, endDate: string, place?: string): Promise<any> {
     // throw error if endpoint does not exist
@@ -315,6 +376,15 @@ export class TileLayerService {
     }, options);
   }
 
+
+  getEviLayerOptions(options: L.TileLayerOptions = {}): L.TileLayerOptions {
+    const attribution = this.getEarthEngineAttribution();
+
+    return assign({}, this.getDefaultOptions(), {
+      attribution
+    }, options);
+  }
+
   getRainFallLayerOptions(options: L.TileLayerOptions = {}): L.TileLayerOptions {
     const attribution = this.getEarthEngineAttribution();
 
@@ -354,6 +424,7 @@ export class TileLayerService {
 
     return queryFilter;
   }
+
 
 }
 

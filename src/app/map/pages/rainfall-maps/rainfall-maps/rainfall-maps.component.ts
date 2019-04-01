@@ -5,7 +5,7 @@
  * Licensed under MIT
  */
 
-import { Component, ElementRef, Inject, OnInit, OnDestroy, Renderer, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, OnDestroy, Renderer, ViewChild , ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -28,6 +28,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/fromPromise';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-rainfall-maps',
@@ -49,6 +50,13 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
   private _oldZoom: number;
   private _routerParamSubscription: Subscription;
   private _mapSubscription: Subscription;
+  oldQueryData = {
+      startDate: null,
+      endDate: null,
+      markerPos: null
+    };
+
+
 
   @ViewChild('downloadFile') downloadFile: ElementRef;
 
@@ -62,11 +70,18 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _title: Title,
     private _renderer: Renderer,
-    private _store: Store<any>
+    private _store: Store<any>,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef
   ) {
     // make sure that the `this` value inside the onMapClick is this component's instance.
     this._mapClickListener = this.onMapClick.bind(this);
   }
+  showSuccess() {
+
+    this.toastr.success('Fetching map layer', 'Please Wait');
+  }
+
 
   ngOnInit() {
     this._mapService
@@ -200,11 +215,7 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
   setupMapClick(targetEl: HTMLElement) {
     let queryDataChanged = false;
 
-    let oldQueryData = {
-      startDate: null,
-      endDate: null,
-      markerPos: null
-    };
+
 
     // create delegate function to handle event delegation
     const delegate = (el: any, eventName: string, selector: string, callback: Function) => {
@@ -233,23 +244,24 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
 
       // if the marker position, startDate and endDate has not changed set the queryDataChanged to false
       if (
-        (oldQueryData.startDate !== null && oldQueryData.startDate === this._currentStartDate) &&
-        (oldQueryData.endDate !== null && oldQueryData.endDate === this._currentEndDate) &&
-        (oldQueryData.markerPos !== null && (markerPos.lat === oldQueryData.markerPos.lat && markerPos.lng === oldQueryData.markerPos.lng))
+        (this.oldQueryData.startDate !== null && this.oldQueryData.startDate === this._currentStartDate) &&
+        (this.oldQueryData.endDate !== null && this.oldQueryData.endDate === this._currentEndDate) &&
+        (this.oldQueryData.markerPos !== null && (markerPos.lat === this.oldQueryData.markerPos.lat && markerPos.lng === this.oldQueryData.markerPos.lng))
       ) {
         queryDataChanged = false;
       }
 
+
       // if the marker position, startDate and endDate has changed set the queryDataChanged to true
       // and invalidate any cached data.
       if (
-        (oldQueryData.startDate !== null && oldQueryData.startDate !== this._currentStartDate) ||
-        (oldQueryData.endDate !== null && oldQueryData.endDate !== this._currentEndDate) ||
-        (oldQueryData.markerPos !== null && (markerPos.lat !== oldQueryData.markerPos.lat || markerPos.lng !== oldQueryData.markerPos.lng))
+        (this.oldQueryData.startDate !== null && this.oldQueryData.startDate !== this._currentStartDate) ||
+        (this.oldQueryData.endDate !== null && this.oldQueryData.endDate !== this._currentEndDate) ||
+        (this.oldQueryData.markerPos !== null && (markerPos.lat !== this.oldQueryData.markerPos.lat || markerPos.lng !== this.oldQueryData.markerPos.lng))
       ) {
         queryDataChanged = true;
 
-        oldQueryData = {
+        this.oldQueryData = {
           markerPos,
           startDate: this._currentStartDate,
           endDate: this._currentEndDate
@@ -259,16 +271,16 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
         this._oldDailyRainfallData = undefined;
       }
 
-      if (oldQueryData.markerPos === null) {
-        oldQueryData.markerPos = this._marker.getLatLng();
+      if (this.oldQueryData.markerPos === null) {
+        this.oldQueryData.markerPos = this._marker.getLatLng();
       }
 
-      if (oldQueryData.startDate === null) {
-        oldQueryData.startDate = this._currentStartDate;
+      if (this.oldQueryData.startDate === null) {
+        this.oldQueryData.startDate = this._currentStartDate;
       }
 
-      if (oldQueryData.endDate === null) {
-        oldQueryData.endDate = this._currentEndDate;
+      if (this.oldQueryData.endDate === null) {
+        this.oldQueryData.endDate = this._currentEndDate;
       }
     };
 
@@ -543,6 +555,7 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
 
   processData(startDate: string, endDate: string, place?: string) {
     // remove all layers published on the store
+    this.showSuccess();
     this._store.dispatch({
       type: 'REMOVE_ALL_LAYERS'
     });

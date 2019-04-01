@@ -32,7 +32,6 @@ export class NdviMapService {
     if (typeof format !== 'undefined' && includes(['json', 'csv'], format)) {
       endpoint += `?fmt=${format}`;
     }
-
     return endpoint;
   }
 

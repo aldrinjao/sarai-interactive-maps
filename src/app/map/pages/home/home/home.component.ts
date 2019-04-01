@@ -108,6 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this._router.isActive(urlPart, false);
   }
 
+
   togglePanels(mapType: MapTypeComponent) {
     this.mapTypes
       .filter((mapTypeItem: MapTypeComponent) => {
@@ -116,7 +117,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .forEach((mapTypeItem: MapTypeComponent) => {
         mapTypeItem.toggleActiveState();
       })
-      ;
   }
 
   onTileSelectorHide(event) {

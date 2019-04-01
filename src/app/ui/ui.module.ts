@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartsModule } from './charts';
 import { ModalModule } from './modal';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ModalModule } from './modal';
   exports: [
     ChartsModule,
     ModalModule
-  ]
+  ],
+  declarations: [LoaderComponent]
 })
 export class UiModule { }
 

@@ -11,21 +11,26 @@ import { CommonModule } from '@angular/common';
 import { NdviMapsRoutingModule } from './ndvi-maps-routing.module';
 
 import { NdviMapService } from './ndvi-map.service';
+import { LoaderService} from '../../../ui/loader/loader.service';
 
 import { NdviMapsComponent } from './ndvi-maps/ndvi-maps.component';
 import { InfoOverlayComponent } from './info-overlay/info-overlay.component';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     NdviMapsRoutingModule
+
   ],
   declarations: [
     NdviMapsComponent,
     InfoOverlayComponent
   ],
   providers: [
-    NdviMapService
+    NdviMapService,
+    LoaderService
   ],
   exports: [
     NdviMapsComponent,

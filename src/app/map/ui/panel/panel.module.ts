@@ -17,8 +17,11 @@ import { MapUiFormsModule } from '../forms';
 import { BasePanelComponent } from './base-panel/base-panel.component';
 import { CropProductionAreaPanelComponent } from './crop-production-area-panel/crop-production-area-panel.component';
 import { NdviPanelComponent } from './ndvi-panel/ndvi-panel.component';
+import { EviPanelComponent } from './evi-panel/evi-panel.component';
+
 import { RainfallMapPanelComponent } from './rainfall-map-panel/rainfall-map-panel.component';
 import { SuitabilityMapPanelComponent } from './suitability-map-panel/suitability-map-panel.component';
+import { AgriDroughtPanelComponent } from './agri-drought-panel/agri-drought-panel.component';
 
 @NgModule({
   imports: [
@@ -34,15 +37,19 @@ import { SuitabilityMapPanelComponent } from './suitability-map-panel/suitabilit
     BasePanelComponent,
     CropProductionAreaPanelComponent,
     NdviPanelComponent,
+    EviPanelComponent,
     RainfallMapPanelComponent,
-    SuitabilityMapPanelComponent
+    SuitabilityMapPanelComponent,
+    AgriDroughtPanelComponent
   ],
   exports: [
     BasePanelComponent,
     CropProductionAreaPanelComponent,
     NdviPanelComponent,
+    EviPanelComponent,
     RainfallMapPanelComponent,
-    SuitabilityMapPanelComponent
+    SuitabilityMapPanelComponent,
+    AgriDroughtPanelComponent
   ]
 })
 export class PanelModule { }

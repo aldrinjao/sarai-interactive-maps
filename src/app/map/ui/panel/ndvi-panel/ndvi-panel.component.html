@@ -1,3 +1,4 @@
+
 <div class="map__control map__control--panel"
     [@controlWrapper]="controlWrapperAnimationState"
     #controlwrapper>
@@ -19,6 +20,47 @@
             <app-ndvi-filter-form></app-ndvi-filter-form>
         </div>
     </section>
+
+    <section class="map__control__section map-legend" *ngIf="isMapActive()">
+        <h2 class="map__control__title title">
+            <span class="title__text">Legend</span>
+        </h2>
+
+        <div class="map__control__body">
+            <dl class="dl-horizontal legend-list">
+                <dt class="legend-item legend-item--header legend-item--key">NDVI</dt>
+                <dd class="legend-item legend-item--header legend-item--value">Value(0-1)</dd>
+
+                <dt class="legend-item legend-item--color legend-item--key">
+                    <span class="color-block" style="background: linear-gradient(to right, #FFFFFF , #F1B555);"></span>
+                    <span class="hidden">0 to 0.2</span>
+                </dt>
+                <dd class="legend-item legend-item--value">0 to .2</dd>
+
+                <dt class="legend-item legend-item--color legend-item--key">
+                    <span class="color-block" style="background: linear-gradient(to right, #FCD163 , #66A000);"></span>
+                    <span class="hidden">0.2 to 0.4</span>
+                </dt>
+                <dd class="legend-item legend-item--value">0.2 to 0.4</dd>
+
+                <dt class="legend-item legend-item--color legend-item--key">
+                    <span class="color-block" style="background: linear-gradient(to right, #529400 , #056201);"></span>
+                    <span class="hidden">0.4 to 0.6</span>
+                </dt>
+                <dd class="legend-item legend-item--value">0.4 to 0.6</dd>
+
+                <dt class="legend-item legend-item--color legend-item--key">
+                    <span class="color-block" style="background: linear-gradient(to right, #004C00 , #023B01);"></span>
+                    <span class="hidden">0.6 to 0.8</span>
+                </dt>
+                <dd class="legend-item legend-item--value">0.6 to 0.8</dd>
+                <dt class="legend-item legend-item--color legend-item--key">
+                    <span class="color-block" style="background: linear-gradient(to right, #012E01 , #011301);"></span>
+                    <span class="hidden">0.8 to 1</span>
+                </dt>
+                <dd class="legend-item legend-item--value">0.8 to 1</dd>
+            </dl>
+        </div>
+    </section>
+
 </div>
-
-

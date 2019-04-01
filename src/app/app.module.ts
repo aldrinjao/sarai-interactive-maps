@@ -6,6 +6,7 @@
  */
 
 import { BrowserModule, Title } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
 import { ModalModule } from 'ng2-bootstrap/modal';
@@ -19,11 +20,17 @@ import { StoreModule } from './store';
 import { MapModule } from './map';
 import { UiModule } from './ui';
 import { SharedModule } from './shared';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { TranslationFactoryLoader } from './app-translation-factory.service';
 import { AppConfig, APP_CONFIG } from './app.config';
 
 import { AppComponent } from './app.component';
+
+
+import {ToastOptions} from 'ng2-toastr';
+import {CustomOption} from './custom-option';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +39,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpModule,
+    ToastModule.forRoot(),
     SaraiInteractiveMapsRoutingModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
@@ -54,7 +62,8 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     Title,
-    { provide: APP_CONFIG, useValue: AppConfig }
+    { provide: APP_CONFIG, useValue: AppConfig },
+    {provide: ToastOptions, useClass: CustomOption},
   ],
   bootstrap: [AppComponent]
 })

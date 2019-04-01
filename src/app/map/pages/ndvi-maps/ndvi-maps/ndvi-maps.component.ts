@@ -5,7 +5,7 @@
  * Licensed under MIT
  */
 
-import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer, ViewChild , ViewContainerRef} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -16,6 +16,7 @@ import { LeafletMapService } from '../../../../leaflet';
 import { TileLayerService } from '../../../shared';
 import { NdviMapService } from '../ndvi-map.service';
 import { LoggerService } from '../../../../shared';
+import { LoaderService} from '../../../../ui/loader/loader.service';
 import { ChartModalComponent, LineChartComponent, SpawnModalService } from '../../../../ui';
 import { Layer } from '../../../../store';
 import { APP_CONFIG } from '../../../../app.config';
@@ -36,6 +37,8 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+
 
 @Component({
   selector: 'app-ndvi-maps',
@@ -59,6 +62,12 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
   private _currentStartDate: string;
   private _currentEndDate: string;
 
+  oldQueryData = {
+      startDate: null,
+      endDate: null,
+      markerPos: null
+    };
+
   @ViewChild('downloadFile') downloadFile: ElementRef;
 
   constructor(
@@ -71,10 +80,19 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
     private _route: ActivatedRoute,
     private _title: Title,
     private _renderer: Renderer,
-    private _store: Store<any>
+    private _store: Store<any>,
+    private _loader: LoaderService,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef
   ) {
     // make sure that the `this` value inside the onMapClick is this component's instance.
     this._mapClickListener = this.onMapClick.bind(this);
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+
+  showSuccess() {
+
+    this.toastr.success('Fetching map layer', 'Please Wait');
   }
 
   // TODO: create a reusable function to validate date format
@@ -172,8 +190,8 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
             type: 'ACTIVATE_PANEL',
             payload: 'ndvi-maps'
           });
-
           this.processData(this._currentStartDate, this._currentEndDate, queryParams['province']);
+
         } else {
           // add the panel to the store
           this._store.dispatch({
@@ -211,11 +229,6 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
   setupMapClick(targetEl: HTMLElement) {
     let queryDataChanged = false;
 
-    let oldQueryData = {
-      startDate: null,
-      endDate: null,
-      markerPos: null
-    };
 
     // create delegate function to handle event delegation
     const delegate = (el: any, eventName: string, selector: string, callback: Function) => {
@@ -244,9 +257,9 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
 
       // if the marker position, startDate and endDate has not changed set the queryDataChanged to false
       if (
-        (oldQueryData.startDate !== null && oldQueryData.startDate === this._currentStartDate) &&
-        (oldQueryData.endDate !== null && oldQueryData.endDate === this._currentEndDate) &&
-        (oldQueryData.markerPos !== null && (markerPos.lat === oldQueryData.markerPos.lat && markerPos.lng === oldQueryData.markerPos.lng))
+        (this.oldQueryData.startDate !== null && this.oldQueryData.startDate === this._currentStartDate) &&
+        (this.oldQueryData.endDate !== null && this.oldQueryData.endDate === this._currentEndDate) &&
+        (this.oldQueryData.markerPos !== null && (markerPos.lat === this.oldQueryData.markerPos.lat && markerPos.lng === this.oldQueryData.markerPos.lng))
       ) {
         queryDataChanged = false;
       }
@@ -254,13 +267,13 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
       // if the marker position, startDate and endDate has changed set the queryDataChanged to true
       // and invalidate any cached data.
       if (
-        (oldQueryData.startDate !== null && oldQueryData.startDate !== this._currentStartDate) ||
-        (oldQueryData.endDate !== null && oldQueryData.endDate !== this._currentEndDate) ||
-        (oldQueryData.markerPos !== null && (markerPos.lat !== oldQueryData.markerPos.lat || markerPos.lng !== oldQueryData.markerPos.lng))
+        (this.oldQueryData.startDate !== null && this.oldQueryData.startDate !== this._currentStartDate) ||
+        (this.oldQueryData.endDate !== null && this.oldQueryData.endDate !== this._currentEndDate) ||
+        (this.oldQueryData.markerPos !== null && (markerPos.lat !== this.oldQueryData.markerPos.lat || markerPos.lng !== this.oldQueryData.markerPos.lng))
       ) {
         queryDataChanged = true;
 
-        oldQueryData = {
+        this.oldQueryData = {
           markerPos,
           startDate: this._currentStartDate,
           endDate: this._currentEndDate
@@ -270,16 +283,16 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
         this._oldTimeSeriesData = undefined;
       }
 
-      if (oldQueryData.markerPos === null) {
-        oldQueryData.markerPos = this._marker.getLatLng();
+      if (this.oldQueryData.markerPos === null) {
+        this.oldQueryData.markerPos = this._marker.getLatLng();
       }
 
-      if (oldQueryData.startDate === null) {
-        oldQueryData.startDate = this._currentStartDate;
+      if (this.oldQueryData.startDate === null) {
+        this.oldQueryData.startDate = this._currentStartDate;
       }
 
-      if (oldQueryData.endDate === null) {
-        oldQueryData.endDate = this._currentEndDate;
+      if (this.oldQueryData.endDate === null) {
+        this.oldQueryData.endDate = this._currentEndDate;
       }
     };
 
@@ -364,11 +377,11 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
         .getNdviTimeSeriesByLatLng(coords, startDate, endDate)
         .map((data: any) => {
           this._oldTimeSeriesData = data;
-
           return data;
         })
         ;
     }
+
 
     dataObservable
       .delay(300)
@@ -377,7 +390,6 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
         const labels = map(data.result, (item: any) => {
           return moment(item['time'], 'YYYY-MM-DD').format('MMMM D, YYYY');
         });
-
         const dataset: Chart.ChartDataSets = this.genereateChartDataSetOption({
           data: map(data.result, 'ndvi'),
           label: 'NDVI'
@@ -627,14 +639,16 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
   }
 
   processData(startDate: string, endDate: string, place?: string) {
+
+    this.showSuccess();
     // remove all layers published on the store
     this._store.dispatch({
       type: 'REMOVE_ALL_LAYERS'
     });
-
     this._tileLayerService
       .getNdviLayerData(startDate, endDate, place)
       .then((response: any) => {
+        this._loader.show();
         const tileUrl = this._tileLayerService.getEarthEngineMapUrl(response.mapId, response.mapToken);
 
         // assemble the layer
@@ -647,8 +661,7 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
 
         // set the layer id for the component instance
         this._layerId = response.mapId;
-
-        // clear tile layers before adding it
+        this._loader.hide();        // clear tile layers before adding it
         return Promise.all([
           Promise.resolve(layer),
           this._mapService.clearTileLayers()
@@ -662,8 +675,10 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
           type: 'ADD_LAYER',
           payload: layer
         });
+        // put a loading animation here
+        const testvar: any = this._mapService.addNewTileLayer(layer.id, layer.url, layer.layerOptions);
+        return testvar;
 
-        return this._mapService.addNewTileLayer(layer.id, layer.url, layer.layerOptions);
       })
       .catch((error) => {
         let message = error.message;
@@ -676,6 +691,7 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
         this._logger.log('NDVI Map Data Unavailable', message, true);
       })
       ;
+
   }
 
   genereateChartDataSetOption(dataset: any): Chart.ChartDataSets {

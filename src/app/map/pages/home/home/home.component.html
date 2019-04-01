@@ -23,7 +23,8 @@
             </app-suitability-map-panel>
         </app-map-type>
 
-        <!-- <app-map-type
+        <!-- 
+        <app-map-type
             activateOnUrl="/crop-production-area"
             (activate)="togglePanels(cropProductionAreaMapType)"
             #cropProductionAreaMapType>
@@ -41,8 +42,13 @@
 
             <app-crop-production-area-panel map-type-panel (hideButtonClick)="cropProductionAreaMapType.toggleActiveState(false)" #mapTypePanel>
             </app-crop-production-area-panel>
-        </app-map-type> -->
+        </app-map-type> 
 
+         -->
+
+
+        
+        
         <app-map-type
             activateOnUrl="/ndvi"
             (activate)="togglePanels(ndviMapType)"
@@ -82,6 +88,58 @@
             <app-rainfall-map-panel map-type-panel (hideButtonClick)="rainfallMapType.toggleActiveState(false)" #mapTypePanel>
             </app-rainfall-map-panel>
         </app-map-type>
+
+
+
+
+
+        <app-map-type
+            activateOnUrl="/agri-drought"
+            (activate)="togglePanels(agriDroughtMapType)"
+            #agriDroughtMapType
+        >
+
+            <app-leaflet-button
+                map-type-button
+                controlClass="map__control--map-data-type map__control--agridrought"
+                btnTooltip="Standardized Vegetation-Temperature Ratio Map"
+                btnTooltipPosition="right"
+                (buttonClick)="agriDroughtMapType.toggleActiveState()"
+                #agriDroughtMapButton>
+
+                <i class="fa fa-thermometer-full fa-lg"></i>
+            </app-leaflet-button>
+
+            <app-agri-drought-panel map-type-panel (hideButtonClick)="agriDroughtMapType.toggleActiveState(false)" #mapTypePanel>
+            </app-agri-drought-panel>
+        </app-map-type>
+
+
+
+        <app-map-type
+            activateOnUrl="/evi"
+            (activate)="togglePanels(eviMapType)"
+            #eviMapType>
+
+            <app-leaflet-button
+                map-type-button
+                controlClass="map__control--map-data-type map__control--evi"
+                btnTooltip="Enhanced Vegetation Index (EVI)"
+                btnTooltipPosition="right"
+                (buttonClick)="eviMapType.toggleActiveState()"
+                #eviButton>
+
+                <i class="glyphicon glyphicon-leaf"></i>
+            </app-leaflet-button>
+
+            <app-evi-panel map-type-panel (hideButtonClick)="eviMapType.toggleActiveState(false)" #mapTypePanel>
+            </app-evi-panel>
+        </app-map-type>
+
+
+
+
+
     </div>
 
     <div class="control-wrapper control-wrapper--right pull-right" map-control #controlWrapperUpperRight>

@@ -32,7 +32,7 @@ export class CropProductionAreaMapsComponent implements OnInit, OnDestroy {
   private _wmsTileUrl: string;
   private _map: L.Map;
   private _mapLayers: Observable<any>;
-  private
+
 
   constructor(
     @Inject(MAP_CONFIG) private _mapConfig: any,
@@ -99,7 +99,6 @@ export class CropProductionAreaMapsComponent implements OnInit, OnDestroy {
         url: this._wmsTileUrl,
         layerOptions: layer
       };
-
       return payload;
     });
 
@@ -111,6 +110,8 @@ export class CropProductionAreaMapsComponent implements OnInit, OnDestroy {
       type: 'ADD_LAYERS',
       payload: processedLayers
     });
+
+
   }
 
   removeLayers() {

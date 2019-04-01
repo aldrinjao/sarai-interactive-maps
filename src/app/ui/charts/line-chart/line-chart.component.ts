@@ -24,7 +24,7 @@ export class LineChartComponent implements AfterViewInit, OnDestroy {
   constructor(injector: Injector) {
     // retrieve properties from the injector
     this.data = injector.get('data', {});
-    this.options = injector.get('options', {});
+    this.options = injector.get('options', {})
   }
 
   getChartInstance(): Chart {
@@ -74,6 +74,7 @@ export class LineChartComponent implements AfterViewInit, OnDestroy {
       options: this.options,
       data: this.data
     });
+
   }
 
   ngOnDestroy() {

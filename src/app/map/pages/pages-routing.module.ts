@@ -7,7 +7,6 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { HomeComponent } from './home/home/home.component';
 
 const routes: Routes = [
@@ -20,10 +19,10 @@ const routes: Routes = [
         loadChildren: './suitability-maps/suitability-maps.module#SuitabilityMapsModule'
       },
 
-      // {
-      //   path: 'crop-production-area',
-      //   loadChildren: './crop-production-area-maps/crop-production-area-maps.module#CropProductionAreaMapsModule'
-      // },
+       {
+         path: 'crop-production-area',
+         loadChildren: './crop-production-area-maps/crop-production-area-maps.module#CropProductionAreaMapsModule'
+       },
 
       // duplicated for required url parameters `startDate` and `endDate`
       {
@@ -36,6 +35,14 @@ const routes: Routes = [
         path: 'rainfall-maps',
         loadChildren: './rainfall-maps/rainfall-maps.module#RainfallMapsModule'
       },
+      {
+        path: 'agri-drought',
+        loadChildren: './agri-drought/agri-drought.module#AgriDroughtModule'
+      },
+      {
+        path: 'evi',
+        loadChildren: './evi-maps/evi-maps.module#EviMapsModule'
+      }
     ]
   }
 ];

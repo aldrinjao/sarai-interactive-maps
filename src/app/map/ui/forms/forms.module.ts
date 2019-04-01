@@ -14,6 +14,7 @@ import { FormsModule as SaraiInteractiveMapsFormsModule } from '../../../forms';
 
 import { DownloadImageFormComponent } from './download-image-form/download-image-form.component';
 import { NdviFilterFormComponent } from './ndvi-filter-form/ndvi-filter-form.component';
+import { EviFilterFormComponent } from './evi-filter-form/evi-filter-form.component';
 import { RainfallMapFilterFormComponent } from './rainfall-map-filter-form/rainfall-map-filter-form.component';
 
 @NgModule({
@@ -26,12 +27,14 @@ import { RainfallMapFilterFormComponent } from './rainfall-map-filter-form/rainf
   ],
   declarations: [
     NdviFilterFormComponent,
+    EviFilterFormComponent,
     RainfallMapFilterFormComponent,
     DownloadImageFormComponent
   ],
   exports: [
     DownloadImageFormComponent,
     NdviFilterFormComponent,
+    EviFilterFormComponent,
     RainfallMapFilterFormComponent
   ]
 })
