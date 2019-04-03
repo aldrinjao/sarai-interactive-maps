@@ -14,7 +14,7 @@ import { TooltipDirective } from 'ng2-bootstrap/tooltip';
 import { CookieService } from 'ngx-cookie';
 import { Angulartics2 } from 'angulartics2';
 import { TranslateService } from '@ngx-translate/core';
-import { PdfPreviewModalComponent, SpawnModalService } from '../../../../ui';
+import { PdfPreviewModalComponent, AlertModalComponent, InfoModalComponent, SpawnModalService } from '../../../../ui';
 import { LoggerService, WindowService } from '../../../../shared';
 import { LeafletButtonComponent } from '../../../../leaflet';
 import { MapTypeComponent } from '../map-type/map-type.component';
@@ -76,12 +76,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('before modal');
+    this._modal.spawn({
+          component: InfoModalComponent,
+          inputs: {
+            openImmediately: true
+          }
+        });
+    console.log('after modal');
+
+    // this._logger.log('Data Loading', 'Please wait while we fetch the data and generate the chart.', true);
+
     // set default coords for the map
     this.mapCoords = {
       lat: 13,
       lng: 122
     };
-
     // set the page title
     this._title.setTitle(`${this._globalConfig.app_title}`);
 
@@ -116,7 +126,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
       .forEach((mapTypeItem: MapTypeComponent) => {
         mapTypeItem.toggleActiveState();
-      })
+      });
+    if (mapType.activateOnUrl==='/tutorial'){
+        console.log('before modal');
+        this._modal.spawn({
+              component: InfoModalComponent,
+              inputs: {
+                openImmediately: true,
+              }
+            });
+        console.log('after modal');
+
+    }
   }
 
   onTileSelectorHide(event) {

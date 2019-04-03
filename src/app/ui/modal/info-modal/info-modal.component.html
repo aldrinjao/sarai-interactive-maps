@@ -1,0 +1,40 @@
+<div class="modal--base modal fade" tabindex="-1" role="dialog" aria-labelledby="baseModalLabel" aria-hidden="true"
+    bsModal
+    (onShown)="onShow($event)"
+    (onHidden)="onHide($event)"
+    #contentModal="bs-modal">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="min-height: 60vh;">
+            <div class="modal-header" style="text-align:center;">
+                <button type="button" class="close" (click)="contentModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h2 class="modal-title" #contentModalTitle>Welcome to SARAi Interactive Maps!</h2>
+            </div>
+
+            <div class="modal-body" #contentModalBody style="display: flex;flex-wrap: wrap;">
+                <div  style="width:40%;">
+                    <img src="/assets/instruction.png" style="width:100%">
+                
+                </div>
+                <div style="width:60%;">
+                    <div style="padding:3%;">
+                    <h3>
+                     Click the icons on the left to start interacting with map layers.
+                    </h3>   
+                    <h3>
+                        You can also click "Learn More" at the bottom of the page to see more information and instructions for each map layer.
+                    </h3>   
+
+                    </div>
+                </div>
+                 
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+

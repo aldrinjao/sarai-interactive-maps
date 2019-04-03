@@ -56,7 +56,6 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
     this.toastr.setRootViewContainerRef(vcr);
   }
   showSuccess() {
-
     this.toastr.success('Fetching map layer', 'Please Wait');
   }
 
@@ -82,7 +81,6 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
     this.crop = 'dcaf_nov18_sq';
     const layers = this._tileLayerService.getSVTRLayers(this.crop);
 
-    this.showSuccess();
     // assemble the layers payload for saving to the application store.
     const processedLayers = map(layers, (layer: L.WMSOptions) => {
       const payload: Layer = {
@@ -91,7 +89,7 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
         url: this._wmsTileUrl,
         layerOptions: layer
       };
-
+      this.showSuccess();
       return payload;
     });
 

@@ -26,7 +26,7 @@ import { MapTypeComponent } from './map-type/map-type.component';
     TooltipModule,
     Angulartics2Module.forChild(),
     LeafletModule,
-    MapUiModule,
+    MapUiModule
   ],
   declarations: [
     HomeComponent,

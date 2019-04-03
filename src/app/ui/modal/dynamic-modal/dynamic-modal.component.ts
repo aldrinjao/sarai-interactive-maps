@@ -12,6 +12,7 @@ import { BaseModalComponent } from '../base-modal/base-modal.component';
 import { AlertModalComponent } from '../alert-modal/alert-modal.component';
 import { ChartModalComponent } from '../chart-modal/chart-modal.component';
 import { PdfPreviewModalComponent } from '../pdf-preview-modal/pdf-preview-modal.component';
+import { InfoModalComponent } from '../info-modal/info-modal.component';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import {
@@ -32,7 +33,8 @@ import {
     BaseModalComponent,
     AlertModalComponent,
     ChartModalComponent,
-    PdfPreviewModalComponent
+    PdfPreviewModalComponent,
+    InfoModalComponent
   ]
 })
 export class DynamicModalComponent implements AfterViewInit {

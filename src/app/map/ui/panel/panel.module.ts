@@ -22,6 +22,7 @@ import { EviPanelComponent } from './evi-panel/evi-panel.component';
 import { RainfallMapPanelComponent } from './rainfall-map-panel/rainfall-map-panel.component';
 import { SuitabilityMapPanelComponent } from './suitability-map-panel/suitability-map-panel.component';
 import { AgriDroughtPanelComponent } from './agri-drought-panel/agri-drought-panel.component';
+import { TutorialPanelComponent } from './tutorial-panel/tutorial-panel.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { AgriDroughtPanelComponent } from './agri-drought-panel/agri-drought-pan
     EviPanelComponent,
     RainfallMapPanelComponent,
     SuitabilityMapPanelComponent,
-    AgriDroughtPanelComponent
+    AgriDroughtPanelComponent,
+    TutorialPanelComponent
   ],
   exports: [
     BasePanelComponent,
@@ -49,7 +51,8 @@ import { AgriDroughtPanelComponent } from './agri-drought-panel/agri-drought-pan
     EviPanelComponent,
     RainfallMapPanelComponent,
     SuitabilityMapPanelComponent,
-    AgriDroughtPanelComponent
+    AgriDroughtPanelComponent,
+    TutorialPanelComponent
   ]
 })
 export class PanelModule { }

@@ -76,10 +76,12 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
   ) {
     // make sure that the `this` value inside the onMapClick is this component's instance.
     this._mapClickListener = this.onMapClick.bind(this);
+    this.toastr.setRootViewContainerRef(vcr);
+
   }
   showSuccess() {
-
     this.toastr.success('Fetching map layer', 'Please Wait');
+    
   }
 
 

@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: 'evi',
         loadChildren: './evi-maps/evi-maps.module#EviMapsModule'
+      },
+      {
+        path: 'tutorial',
+        loadChildren: './tutorial/tutorial.module#TutorialModule'
       }
     ]
   }

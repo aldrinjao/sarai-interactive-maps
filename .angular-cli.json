@@ -24,6 +24,7 @@
         "../node_modules/leaflet-measure/dist/leaflet-measure.css",
         "../node_modules/leaflet-sidebar/src/L.Control.Sidebar.css",
         "../node_modules/flatpickr/dist/flatpickr.min.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles.sass"
       ],
       "scripts": [

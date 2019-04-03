@@ -136,6 +136,26 @@
             </app-evi-panel>
         </app-map-type>
 
+    <app-map-type
+        activateOnUrl="/tutorial"
+        (activate)="togglePanels(tutMapType)"
+        #tutMapType>
+
+            <app-leaflet-button
+                map-type-button
+                controlClass="map__control--map-data-type map__control--tutorial"
+                btnTooltip="Enhanced Vegetation Index (EVI)"
+                btnTooltipPosition="right"
+                (buttonClick)="tutMapType.toggleActiveState()"
+                #tutorialButton>
+
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </app-leaflet-button>
+            <app-tutorial-panel map-type-panel (hideButtonClick)="tutMapType.toggleActiveState(false)" #mapTypePanel>
+            </app-tutorial-panel>
+        </app-map-type>
+
+
 
 
 
@@ -290,5 +310,3 @@
 </app-leaflet-map>
 
 <router-outlet name="info-overlay-control"></router-outlet>
-
-

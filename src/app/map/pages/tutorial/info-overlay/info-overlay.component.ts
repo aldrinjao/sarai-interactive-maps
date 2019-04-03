@@ -28,7 +28,7 @@ export function baseInfoOverlayAnimation(): AnimationEntryMetadata {
 }
 
 @Component({
-  selector: 'app-ndvi-map-info-overlay',
+  selector: 'app-tutorial-info-overlay',
   templateUrl: './info-overlay.component.html',
   styleUrls: ['./info-overlay.component.sass'],
   animations: [

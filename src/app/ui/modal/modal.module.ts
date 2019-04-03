@@ -18,6 +18,7 @@ import { BaseModalComponent } from './base-modal/base-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { PdfPreviewModalComponent } from './pdf-preview-modal/pdf-preview-modal.component';
 import { ChartModalComponent } from './chart-modal/chart-modal.component';
+import { InfoModalComponent } from './info-modal/info-modal.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ChartModalComponent } from './chart-modal/chart-modal.component';
     BaseModalComponent,
     AlertModalComponent,
     PdfPreviewModalComponent,
-    ChartModalComponent
+    ChartModalComponent,
+    InfoModalComponent
   ],
   declarations: [
     DynamicModalComponent,
@@ -37,7 +39,8 @@ import { ChartModalComponent } from './chart-modal/chart-modal.component';
     AlertModalComponent,
     PdfPreviewModalComponent,
     PdfViewerComponent,
-    ChartModalComponent
+    ChartModalComponent,
+    InfoModalComponent
   ],
   entryComponents: [
     LineChartComponent

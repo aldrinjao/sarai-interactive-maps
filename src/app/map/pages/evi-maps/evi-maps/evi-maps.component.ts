@@ -97,6 +97,10 @@ export class EviMapsComponent implements OnDestroy, OnInit {
 
   // TODO: create a reusable function to validate date format
   ngOnInit() {
+          this._store.dispatch({
+            type: 'ACTIVATE_PANEL',
+            payload: 'ndvi-maps'
+          });
     this._mapService
       .getMap()
       .then((mapInstance: L.Map) => {
