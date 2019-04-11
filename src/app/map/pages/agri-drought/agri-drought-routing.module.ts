@@ -18,7 +18,7 @@ const routes: Routes = [
   },
 
   {
-    path: ':drought',
+    path: ':month',
     component: AgriDroughtComponent
   },
   {

@@ -20,6 +20,7 @@ import map from 'lodash-es/map';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-agri-drought',
@@ -33,7 +34,7 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
   private _wmsTileUrl: string;
   private _map: L.Map;
   private _mapLayers: Observable<any>;
-
+  private urlparam: string;
 
   constructor(
     @Inject(MAP_CONFIG) private _mapConfig: any,
@@ -45,6 +46,7 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
     private _store: Store<any>,
     public toastr: ToastsManager,
     vcr: ViewContainerRef
+
   ) {
     const resolvedConfig = this._mapConfig.svtr_maps;
 
@@ -59,7 +61,42 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
     this.toastr.success('Fetching map layer', 'Please Wait');
   }
 
+
+
+
   ngOnInit() {
+    let text;
+    this._route.params.forEach((params: Params) => {
+      if (typeof params['month'] !== 'undefined') {
+        // set the crop property
+        this.urlparam = params['month'];
+
+        switch (this.urlparam) {
+          case 'april':
+            text = 'april2019';
+            break;
+          case 'may':
+            text = 'may2019';
+            break;
+          case 'june':
+            text = 'june2019';
+            break;
+          case 'july':
+            text = 'july2019';
+            break;
+          case 'august':
+            text = 'aug2019';
+            break;
+          default:
+            text = 'april2019';
+        }
+
+        this.processLayers(text);
+      }
+
+    });
+
+
     this.layersCollection = this._mapLayers
       .debounceTime(300)
       .map((layerState: LayerState) => {
@@ -69,16 +106,17 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
       })
       ;
 
-        // process wms layers
-        this.processLayers();
-
       // set the page title
       this._title.setTitle(`${this._pageTitle} | ${this._globalConfig.app_title}`);
 
   }
 
-  processLayers() {
-    this.crop = 'dcaf_nov18_sq';
+  // edit agridrought panel, add months, then use suitability maps as pattern for adding urls, use months instead of crops
+
+  processLayers(layer: string) {
+    // this.crop = 'dcaf_nov18_sq';
+    this.crop = layer;
+    // this.crop = 'may2019';
     const layers = this._tileLayerService.getSVTRLayers(this.crop);
 
     // assemble the layers payload for saving to the application store.

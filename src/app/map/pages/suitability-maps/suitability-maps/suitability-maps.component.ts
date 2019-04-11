@@ -101,7 +101,7 @@ export class SuitabilityMapsComponent implements OnInit, OnDestroy {
       if (typeof params['crop'] !== 'undefined') {
         // set the crop property
         this.crop = params['crop'];
-
+       
         // activate the panel
         this._store.dispatch({
           type: 'ACTIVATE_PANEL',

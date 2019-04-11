@@ -4,7 +4,7 @@
 
     <section class="map__control__section">
         <h2 class="map__control__title title">
-            <span class="title__text">SVTR Map November 2018</span>
+            <span class="title__text">SVTR Forecast as of February 2019</span>
             <span class="pull-right title__icon title__icon--actionable" (click)="onHideButtonClick($event)">
                 <i class="glyphicon glyphicon-chevron-left" placement="bottom" tooltip="Hide"></i>
             </span>
@@ -12,8 +12,25 @@
 
         <div class="map__control__body">
             <p>
-                    The Standardized Vegetation-Temperature Ratio (SVTR), a novel drought index for the Philippines, was developed by Drought and Crop Assessment and Forecasting (DCAF) Project, to detect and assess local agricultural drought (Perez et al., 2016).  This drought indicator follows the ratio of NDVI (Normalized Difference Vegetation Index), which represents the photosynthetic capacity of vegetation, and LST (Land Surface Temperature), which enables assessment of how the seasonal and interannual changes in the vegetation are related to changes in surface temperature.
+                SVTR was developed by the DCAF Project to detect and assess local agricultural drought. This drought indicator follows the ratio of NDVI and LST which enables assessment of how the seasonal and interannual changes in the vegetation are related to changes in surface temperature.
             </p>
+
+            <accordion class="accordion--s-1" closeOthers="true">
+               
+                <accordion-group
+                *ngFor="let data of (maps )"
+                (click)="redirect($event, data.slug)"
+                [class.active]="isMonthActive(data.slug)"
+                >
+
+                <div accordion-heading>
+                    <span class="heading__icon">
+                    </span>
+                    <span class="heading__text">{{data.name}}</span>
+                </div>
+
+                </accordion-group>    
+            </accordion>
         </div>
     </section>
  

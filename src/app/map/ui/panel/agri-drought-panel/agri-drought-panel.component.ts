@@ -13,6 +13,7 @@ import { basePanelAnimation, BasePanelComponent } from '../base-panel/base-panel
 import { LeafletMapService } from '../../../../leaflet';
 import { CropProductionAreaMapService } from '../../../shared';
 
+
 @Component({
   selector: 'app-agri-drought-panel',
   templateUrl: './agri-drought-panel.component.html',
@@ -21,9 +22,41 @@ import { CropProductionAreaMapService } from '../../../shared';
     basePanelAnimation()
   ]
 })
+
+
 export class AgriDroughtPanelComponent extends BasePanelComponent implements OnInit {
   public controlWrapperAnimationState = 'hidden';
   public cropData: Observable<any>;
+
+
+  maps = [
+    {
+      'name' : 'april',
+      'slug' : 'april',
+      'url'  : 'april2019'
+    },
+    {
+      'name' : 'may',
+      'slug' : 'may',
+      'url'  : 'may2019'
+    },
+    {
+      'name' : 'june',
+      'slug' : 'june',
+      'url'  : 'june2019'
+    },
+    {
+      'name' : 'july',
+      'slug' : 'july',
+      'url'  : 'july2019'
+    },
+    {
+      'name' : 'august',
+      'slug' : 'august',
+      'url'  : 'aug2019'
+    }
+    ];
+
 
   constructor(
     private _store: Store<any>,
@@ -39,9 +72,6 @@ export class AgriDroughtPanelComponent extends BasePanelComponent implements OnI
   ngOnInit() {
     // call the parent's ngOnInit lifecycle hook
     super.ngOnInit();
-
-    this.cropData = this._cropProductionAreaMapService.getCrops();
-
     // add the panel to the store
     this._store.dispatch({
       type: 'ADD_PANEL',
@@ -58,13 +88,6 @@ export class AgriDroughtPanelComponent extends BasePanelComponent implements OnI
     ) {
       this._router.navigateByUrl('/agri-drought');
     }
-
-    // if (
-    //   (this.controlWrapperAnimationState === 'hidden' || this.controlWrapperAnimationState === 'hidden-immediate') &&
-    //   this._router.isActive('/crop-production-area', false)
-    // ) {
-    //   this._router.navigateByUrl('/');
-    // }
   }
   isMapActive(): boolean {
     return this._router.isActive(`/agri-drought`, false);
@@ -75,6 +98,18 @@ export class AgriDroughtPanelComponent extends BasePanelComponent implements OnI
     // call the parent method
     super.onHideButtonClick(evt);
   }
+
+  isMonthActive(month: string, ): boolean {
+    return this._router.isActive(`/agri-drought/${month}`, true);
+  }
+
+  redirect(event, month: string) {
+
+    // redirect to the URL
+    this._router.navigateByUrl(`/agri-drought/${month}`);
+  }
+
+
 
 }
 
