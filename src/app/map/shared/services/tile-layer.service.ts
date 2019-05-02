@@ -317,7 +317,7 @@ export class TileLayerService {
 
         // throw error here so that we can handle it properly later
         if (jsonResult.success === false) {
-          throw new Error('Map sssData not found.');
+          throw new Error('Map Data not found.');
         }
 
         return jsonResult;
