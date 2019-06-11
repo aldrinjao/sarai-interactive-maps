@@ -54,7 +54,13 @@ export class AgriDroughtPanelComponent extends BasePanelComponent implements OnI
       'name' : 'august',
       'slug' : 'august',
       'url'  : 'aug2019'
+    },
+     {
+      'name' : 'september',
+      'slug' : 'september',
+      'url'  : 'sep2019'
     }
+   
     ];
 
 

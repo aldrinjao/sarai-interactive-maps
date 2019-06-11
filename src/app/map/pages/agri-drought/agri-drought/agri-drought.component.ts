@@ -73,22 +73,26 @@ export class AgriDroughtComponent implements OnInit, OnDestroy {
 
         switch (this.urlparam) {
           case 'april':
-            text = 'april2019';
+            console.log("april");
+            text = 'apr';
             break;
           case 'may':
-            text = 'may2019';
+            text = 'may';
             break;
           case 'june':
-            text = 'june2019';
+            text = 'jun';
             break;
           case 'july':
-            text = 'july2019';
+            text = 'jul';
             break;
           case 'august':
-            text = 'aug2019';
+            text = 'aug';
+            break;
+          case 'september':
+            text = 'sep';
             break;
           default:
-            text = 'april2019';
+            text = 'apr';
         }
 
         this.processLayers(text);
