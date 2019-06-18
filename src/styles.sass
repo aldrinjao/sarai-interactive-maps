@@ -34,6 +34,28 @@ app-root:empty + .preloader,
 
   .no-js &
     display: block
+
+
+//+min-screen-width(769px)
+
+//+max-screen-width(768px)
+ // .navbar-nav
+  //  float: left
+
+
+@media (min-width: 768px)
+  .navbar-nav
+    float: right    
+
+@media (max-width: 768px)
+  .navbar-nav
+    float: left
+
+@media (max-width: 768px)
+  #findaplace
+    display:none !important
+
+
 // [No JavaScript] ::end
 
 // --------------------------------------
@@ -53,3 +75,18 @@ app-root:empty + .preloader,
 // --------------------------------------
 
 
+#ec_place_filter_sel
+  height: auto
+#map-tile-selector
+  height: auto
+
+
+@media (max-width: 768px)
+  #controlWrapperUpperRight
+    display:none !important
+
+.dropdown-menu
+  background: #005A36
+
+.dropdown-item  
+  color: white

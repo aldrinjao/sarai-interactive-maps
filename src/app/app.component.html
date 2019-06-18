@@ -1,4 +1,81 @@
+
+
+
 <div class="main-container">
+
+
+
+    <nav class="navbar navbar-expand-md navbar-dark" style="z-index: 55;background: #005A36;padding-right:0px;">
+        <a class="logo__link" href="http://sarai.ph" >
+            <img src="/assets/img/ui/sarai-logo.png" alt="Project SARAI" class="img" style="height:45px;"/>
+        </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" style="padding-right:0px;">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="http://sarai.ph/about-us">About Us <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item dropdown navbar-dark">
+
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Crops
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+
+
+            <a class="dropdown-item" href="http://sarai.ph/icm-rice">Rice</a>
+            <a class="dropdown-item"  href="http://sarai.ph/icm-corn">Corn</a>
+            <a class="dropdown-item"  href="http://sarai.ph/icm-banana">Banana</a>
+            <a class="dropdown-item"  href="http://sarai.ph/icm-coconut">Coconut</a>
+            <a class="dropdown-item"  href="http://sarai.ph/icm-coffee">Coffee</a>
+            <a class="dropdown-item"  href="http://sarai.ph/icm-cacao">Cacao</a>
+
+
+
+        </div>
+
+      </li>
+      <li class="nav-item dropdown navbar-dark">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Maps
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+
+
+            <a class="dropdown-item"  [routerLink]="['/suitability-maps']">Suitability Maps</a>
+            <a class="dropdown-item"  [routerLink]="['/ndvi']">Normalized Difference Vegetation Index</a>
+            <a class="dropdown-item"  [routerLink]="['/rainfall-maps']">Rainfall Map</a>
+            <a class="dropdown-item"  [routerLink]="['/evi']">Enhanced vegetation Index (EVI)</a>
+
+        
+        </div>
+
+      </li>
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Services
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+
+                <a class="dropdown-item"  href="http://sarai.ph/heat-map-rainfall-outlook">Rainfall Outlook</a>
+                <a class="dropdown-item"  href="http://sarai.ph/suitability-gallery">Suitability Maps Gallery</a>
+                <a class="dropdown-item"  href="http://sarai.ph/drought">Drought and Crop Assessment</a>
+        </div>
+      </li>
+
+      <li>
+            <div class="agencies-logo-wrapper pull-right">
+                <img src="/assets/img/ui/dost-pcaarrd-uplb.png" alt="DOST, PCAARRD, and UPLB" class="img" style="height: 45px;" />
+            </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- 
     <div class="navbar navbar-main navbar-default navbar--s-1">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -69,31 +146,14 @@
                         </ul>
                     </li>
 
-
-                    <!--
-                    <li class="dropdown" #dropdown #dropdown4 (click)="enableDropdown(dropdown4)">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" (click)="dropdownLinkNoop($event)">
-                            Contact Us
-                            <span class="caret"></span>
-                        </a>    
-
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="https://docs.google.com/a/up.edu.ph/forms/d/e/1FAIpQLSdRWCollMXmPGCoKhWZToL249RCc1FAh9KssEuCDH1jDj8ERw/viewform?c=0&amp;w=1">
-                                    Subscribe
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    -->
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <router-outlet></router-outlet>
+
 </div>
-
+<router-outlet></router-outlet>
 <app-dynamic-modal></app-dynamic-modal>
 
 

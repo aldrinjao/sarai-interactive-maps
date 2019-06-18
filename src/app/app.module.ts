@@ -20,7 +20,7 @@ import { StoreModule } from './store';
 import { MapModule } from './map';
 import { UiModule } from './ui';
 import { SharedModule } from './shared';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 import { TranslationFactoryLoader } from './app-translation-factory.service';
 import { AppConfig, APP_CONFIG } from './app.config';
@@ -59,6 +59,7 @@ import {CustomOption} from './custom-option';
     Angulartics2Module.forRoot([
       Angulartics2GoogleAnalytics
     ])
+
   ],
   providers: [
     Title,

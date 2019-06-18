@@ -170,7 +170,9 @@
             (afterHideControl)="onTileSelectorHide($event)">
         </app-leaflet-tile-selector>
 
-        <app-leaflet-geocoder [placeholder]="'GEOCODER.PLACEHOLDER' | translate"></app-leaflet-geocoder>
+        <div id= "findaplace">
+            <app-leaflet-geocoder [placeholder]="'GEOCODER.PLACEHOLDER' | translate"></app-leaflet-geocoder>
+        </div>
         <app-leaflet-zoom></app-leaflet-zoom>
         <app-leaflet-measure></app-leaflet-measure>
     </div>
