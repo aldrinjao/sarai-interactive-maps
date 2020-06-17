@@ -180,7 +180,7 @@
     <div class="control-wrapper control-wrapper--social" map-control>
         <ul class="list list-unstyled">
             <li class="list__item">
-                <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://159.203.253.31"
+                <a href="https://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://maps.sarai.ph"
                     class="btn btn--dome btn--facebook tooltip-wrapper"
                     (click)="openNewWindow($event, facebookShareAnchor.href, 'shareOnFacebook', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250')"
                     #facebookShareAnchor>
@@ -191,7 +191,7 @@
             </li>
 
             <li class="list__item">
-                <a href="https://twitter.com/intent/tweet/?text=Check this out! http://159.203.253.31 %23ProjectSARAI"
+                <a href="https://twitter.com/intent/tweet/?text=Check this out! http://maps.sarai.ph%23ProjectSARAI"
                     class="btn btn--dome btn--twitter tooltip-wrapper"
                     (click)="openNewWindow($event, twitterShareAnchor.href, 'shareOnTwitter', 'toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250')"
                     #twitterShareAnchor>
@@ -200,9 +200,22 @@
                     <span class="tooltip-holder" [tooltip]="'SHARE.TWITTER.TOOLTIP' | translate" placement="left"></span>
                 </a>
             </li>
+            <li class="list__item">
+                <a href="https://www.youtube.com/channel/UC7PynbrxhMKCCm9DrAwWd-Q/feed"
+                    class="btn btn--dome btn--twitter tooltip-wrapper"
+                    target="new"
+                    >
+
+                    <i class="social-icon social-icon--youtube"></i>
+                    <span class="tooltip-holder" [tooltip]="'Visit sarai\'s Youtube channel' " placement="left"></span>
+                </a>
+            </li>
         </ul>
     </div>
 
+
+
+https://www.youtube.com/channel/UC7PynbrxhMKCCm9DrAwWd-Q/videos
     <div class="control-wrapper control-wrapper--interface-controls" map-control>
         <ul class="list list-unstyled">
             <li class="list__item">

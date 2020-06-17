@@ -649,7 +649,7 @@ export class NdviMapsComponent implements OnDestroy, OnInit {
       .getNdviLayerData(startDate, endDate, place)
       .then((response: any) => {
         this._loader.show();
-        const tileUrl = this._tileLayerService.getEarthEngineMapUrl(response.mapId, response.mapToken);
+        const tileUrl = this._tileLayerService.getEarthEngineMapUrl(response.mapId, response.mapToken,response.map_tile);
 
         // assemble the layer
         const layer: Layer = {

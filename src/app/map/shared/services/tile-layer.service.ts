@@ -116,8 +116,10 @@ export class TileLayerService {
     };
   }
 
-  getEarthEngineMapUrl(mapId: string, mapToken: string): string {
-    return `https://earthengine.googleapis.com/map/${mapId}/{z}/{x}/{y}?token=${mapToken}`;
+  getEarthEngineMapUrl(mapId: string, mapToken: string,map_tile: string): string {
+    // return `https://earthengine.googleapis.com/map/${mapId}/{z}/{x}/{y}?token=${mapToken}`;
+    return `${map_tile}`;
+
   }
 
   getEarthEngineAttribution() {

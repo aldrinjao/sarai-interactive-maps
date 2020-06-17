@@ -565,7 +565,7 @@ export class RainfallMapsComponent implements OnInit, OnDestroy {
     this._tileLayerService
       .getRainfallMapLayerData(startDate, endDate, place)
       .then((response: any) => {
-        const tileUrl = this._tileLayerService.getEarthEngineMapUrl(response.mapId, response.mapToken);
+        const tileUrl = this._tileLayerService.getEarthEngineMapUrl(response.mapId, response.mapToken,response.map_tile);
 
         // assemble the layer
         const layer: Layer = {
