@@ -30,36 +30,37 @@ export class AgriDroughtPanelComponent extends BasePanelComponent implements OnI
 
 
   maps = [
+
     {
-      'name': 'january',
-      'slug': 'january',
-      'url': 'jan2020_1'
+      'name': 'july',
+      'slug': 'july',
+      'url': 'Jul2020'
     },
     {
-      'name': 'february',
-      'slug': 'february',
-      'url': 'feb2020_1'
+      'name': 'august',
+      'slug': 'august',
+      'url': 'Aug2020'
     },
     {
-      'name': 'march',
-      'slug': 'march',
-      'url': 'mar2020_1'
+      'name': 'september',
+      'slug': 'september',
+      'url': 'Sep2020'
     },
     {
-      'name': 'april',
-      'slug': 'april',
-      'url': 'apr2020_1'
+      'name': 'october',
+      'slug': 'october',
+      'url': 'Oct2020'
     },
     {
-      'name': 'may',
-      'slug': 'may',
-      'url': 'may2020_1'
+      'name': 'november',
+      'slug': 'november',
+      'url': 'Nov2020'
     },
     {
-      'name': 'june',
-      'slug': 'june',
-      'url': 'jun2020_1'
-    }
+      'name': 'december',
+      'slug': 'december',
+      'url': 'Dec2020'
+    },
 
 
   ];
